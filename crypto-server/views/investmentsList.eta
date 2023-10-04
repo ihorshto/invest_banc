@@ -1,0 +1,48 @@
+<% layout("layout.eta") %>
+
+
+<div class="container">
+  <img class="content-img" src="images/trre.png" alt="">
+  <div class="content_box">
+    <h2 class="content-title"> Investments </h2>
+    <p class="content-text">Sum of investments: <%= it.investmentSum %>$</p>
+  </div>
+  <form class="content_form">
+    <div class="content_form-row">
+      <div class="col-7 content_form-el">
+        <input type="text" class="form-control" placeholder="Description">
+      </div>
+      <div class="col-2 content_form-el">
+        <input type="date" class="form-control" placeholder="Date">
+      </div>
+      <div class="col-2 content_form-el">
+        <input type="number" class="form-control" placeholder="Sum">
+      </div>
+      <button class="content_form-btn content_form-el" type="submit">+</button>
+    </div>
+  </form>
+  <div class="table_wrapper">
+    <table>
+      <thead>
+        <tr class="table100-head">
+          <th class="column1">Id</th>
+          <th class="column2">Description</th>
+          <th class="column3">Date</th>
+          <th class="column4">Sum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let i = 0; i < it.investments.length; i++) {%>
+        <% let item = it.investments[i]; %>
+        <% let date = it.investments[i].date.toLocaleDateString(); %>
+        <tr>
+          <td class="column1"><%= item.id %></td>
+          <td class="column2"><%= item.description %></td>
+          <td class="column3"><%= date %></td>
+          <td class="column4"><%= item.sum %>$</td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
