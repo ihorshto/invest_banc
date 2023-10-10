@@ -25,7 +25,7 @@ let loadInvestmentItem = function () {
         .then(data => {
 
 
-             myDate.value = data;
+            myDate.value = data;
 
             console.log('myDate', myDate)
 

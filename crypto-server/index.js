@@ -30,7 +30,7 @@ async function initMySQL() {
 		host: 'localhost',
 		user: 'root',
 		password: '',
-		database: 'crypto_banc'
+		database: 'invest_banc'
 	});
 }
 
