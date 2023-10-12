@@ -2,12 +2,13 @@
 import { ref } from 'vue'
 
 let investments = ref([]);
+let investmentSum;
 
-
-let investmentSum = 0;
+const today = new Date().toISOString().slice(0, 10);
 
 let loadInvestment = function () {
-  fetch("http://localhost:8000/office/investments", {
+  investmentSum = 0;
+  fetch("http://localhost:8000/investments", {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
@@ -21,14 +22,63 @@ let loadInvestment = function () {
       });
 
       let myDate = data;
-
       console.log('myDate', myDate[0])
-
       investments.value = data;
     })
 }
 
+let addItem = function () {
+  let description = document.getElementById("description").value;
+  let date = document.getElementById("date").value;
+  let sum = document.getElementById("sum").value;
 
+  console.log(description);
+
+
+  console.log("click addItem");
+  fetch("http://localhost:8000/investments/0", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      description: description,
+      date: date,
+      sum: sum
+    }),
+  })
+    .then(response => response.json())
+    .then(data => {
+
+      if (data.message) {
+        alert("All fields are required!");
+      } else {
+        document.getElementById("description").value = "";
+        document.getElementById("date").value = "";
+        document.getElementById("sum").value = "";
+
+        loadInvestment();
+      }
+    })
+    .catch(error => alert(error));
+}
+
+let deleteitem = function (id) {
+  console.log("id", id);
+  fetch("http://localhost:8000/investments/" + id, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+
+      console.log("data", data);
+
+      loadInvestment();
+    })
+}
 
 loadInvestment();
 
@@ -45,15 +95,15 @@ loadInvestment();
       <form class="content_form">
         <div class="content_form-row">
           <div class="col-7 content_form-el">
-            <input type="text" class="form-control" placeholder="Description">
+            <input id="description" type="text" class="form-control" placeholder="Description">
           </div>
           <div class="col-2 content_form-el">
-            <input type="date" class="form-control" placeholder="Date">
+            <input id="date" type="date" class="form-control" v-model="today" placeholder="Date">
           </div>
           <div class="col-2 content_form-el">
-            <input type="number" class="form-control" placeholder="Sum">
+            <input id="sum" type="number" class="form-control" placeholder="Sum">
           </div>
-          <button class="content_form-btn content_form-el" type="submit">+</button>
+          <button class="content_form-btn content_form-el" v-on:click.prevent="addItem">+</button>
         </div>
       </form>
       <div class="table_wrapper">
@@ -64,16 +114,23 @@ loadInvestment();
               <th class="column2">Description</th>
               <th class="column3">Date</th>
               <th class="column4">Sum</th>
+              <th class="column4">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="investment in investments" :key="investment.id">
+            <tr v-for="investment in investments" :key="investment.id" :to="`/investments/${investment.id}`">
               <td class="column1">
-                <a :href="`/investments/${investment.id}`">{{ investment.id }}</a>
+                {{ investment.id }}
               </td>
               <td class="column2">{{ investment.description }}</td>
               <td class="column3">{{ investment.date }}</td>
               <td class="column4">{{ investment.sum }}$</td>
+              <td class="column5">
+                <button class="column_delete-btn" v-on:click.prevent="deleteitem(investment.id)">-</button>
+                <button class="column_modify-btn">
+                  <RouterLink :to="`/investments/${investment.id}`">:</RouterLink>
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>

@@ -3,9 +3,6 @@ import InvestmentView from '../views/InvestmentView.vue'
 import EarningsView from '../views/EarningsView.vue'
 import InvestmentItemView from '../views/InvestmentItemView.vue'
 
-
-
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

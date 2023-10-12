@@ -8,7 +8,7 @@ import { RouterLink, RouterView } from 'vue-router'
       <nav class="nav">
         <div class="nav_container">
           <div>
-            <a class=" navbar_img-link" href="#"><img class="nav_img" src="@/assets/logo.svg" alt="logo"></a>
+            <a class="navbar_img-link" href="#"><img class="nav_img" src="@/assets/logo.svg" alt="logo"></a>
           </div>
           <div class="nav_items">
             <RouterLink to="/investments" class="nav_item-link">Investments</RouterLink>

@@ -46,8 +46,28 @@ async function loadEarnings() {
 
 async function loadOneInvestment(id) {
 	const investment = await connection.query('SELECT * FROM investments WHERE id =?', [id]);
-	console.log('investment', investment);
-	return investment[0];
+	return investment[0][0];
+}
+
+async function deleteOneInvestment(id) {
+	const investment = await connection.query('DELETE FROM investments WHERE id =?', [id]);
+	console.log("del item", investment);
+	return investment;
+}
+
+async function updateOneInvestment(id, body) {
+	console.log("updateOneInvestment");
+	const investment = await connection.query('UPDATE investments SET description=?, date=?, sum=? WHERE id =?', [body.description, body.date, body.sum, id])
+	console.log("update item", investment);
+	return investment;
+}
+
+async function addNewInvestment(newObj) {
+	console.log("newObj", newObj);
+	// INSERT INTO table_name(column_1, column_2, column_3) VALUES
+	const newInvestment = await connection.query(`INSERT INTO investments (description, date, sum) VALUES ('${newObj.description}', '${newObj.date}', ${newObj.sum})`);
+	console.log('newInvestment', newInvestment);
+	return newInvestment[0];
 }
 
 async function loadProduct(id) { }
@@ -57,38 +77,22 @@ async function removeProduct(id) { }
 
 // Premier Page
 app.get("/", function (req, res) {
-	res.redirect("/office/investments");
+	console.log("redirect");
+	res.redirect("/investments");
 });
 
-// GET Investments
-// app.get("/investments", async function (req, res) {
-// 	let investments = await loadInvestments();
-// 	let investmentSum = 0;
-// 
-// 	for (let i = 0; i < investments.length; i++) {
-// 		investmentSum = investmentSum + investments[i].sum;
-// 	}
-// 
-// 	res.render('investmentsList.eta', {
-// 		investments, investmentSum
-// 	});
-// });
-
-app.get("/details/:id", async function (req, res) { });
-
 // Les requêtes REST du backoffice VUE
-app.get("/office/investments", async function (req, res) {
+app.get("/investments", async function (req, res) {
 	let investments = await loadInvestments();
-
 	investments.forEach(element => {
 		element.date = dayjs(element.date).format("DD/MM/YYYY");
 	});
 
 	res.send(investments);
 });
-app.get("/office/earnings", async function (req, res) {
-	let earnings = await loadEarnings();
 
+app.get("/earnings", async function (req, res) {
+	let earnings = await loadEarnings();
 	earnings.forEach(element => {
 		element.date = dayjs(element.date).format("DD/MM/YYYY");
 	});
@@ -96,12 +100,46 @@ app.get("/office/earnings", async function (req, res) {
 	res.send(earnings);
 });
 
-app.get("/office/investments/:id", async function (req, res) {
+app.get("/investments/:id", async function (req, res) {
 	let investment = await loadOneInvestment(req.params.id);
 
-	investment.date = dayjs(investment.date).format("DD/MM/YYYY")
+	investment.date = dayjs(investment.date).format("YYYY-MM-DD");
+	console.log("GET invest", investment);
+
+	// investment.date = new Date(investment.date).toISOString().substring(0, 10);
+
 	res.send(investment);
 });
+
+app.delete("/investments/:id", async function (req, res) {
+	let investment = await deleteOneInvestment(req.params.id);
+	// console.log(investment);
+	console.log(req.params.id);
+
+	res.send(investment);
+});
+
+app.put("/investments/:id", async function (req, res) {
+	console.log("updateOneInvestment POST");
+	let investment = await updateOneInvestment(req.params.id, req.body);
+
+	console.log(req.params.id);
+	console.log(req.body);
+
+	res.send(investment);
+})
+
+app.post("/investments/0", async function (req, res) {
+	if (req.body.description && req.body.date && req.body.sum) {
+		let newInvestment = await addNewInvestment(req.body);
+		res.send(newInvestment);
+		// document.location.reload();
+	} else {
+		res.send({ message: "error" });
+	}
+});
+
+
 
 
 

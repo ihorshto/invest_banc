@@ -7,7 +7,7 @@ let earnings = ref([]);
 let earningSum = 0;
 
 let loadEarnings = function () {
-  fetch("http://localhost:8000/office/earnings", {
+  fetch("http://localhost:8000/earnings", {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
@@ -15,11 +15,9 @@ let loadEarnings = function () {
   })
     .then(response => response.json())
     .then(data => {
-
       data.forEach(element => {
         earningSum += element.sum;
       });
-
       earnings.value = data;
     })
 }

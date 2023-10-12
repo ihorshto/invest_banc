@@ -13,8 +13,14 @@
 
 body,
 html {
+ min-height: 100vh;
  height: 100%;
+
  font-family: sans-serif
+}
+
+.app{
+ min-height: 100vh;
 }
 
 a {
@@ -52,7 +58,7 @@ li {
  list-style-type: none
 }
 
-input {
+/* input {
  display: block;
  outline: none;
  border: none !important
@@ -61,7 +67,7 @@ input {
 textarea {
  display: block;
  outline: none
-}
+} */
 
 textarea:focus,
 input:focus {
@@ -91,7 +97,7 @@ iframe {
 
 header {
  background-color: rgb(193, 193, 193);
- border-bottom: 1px solid #303030;
+ /* border-bottom: 1px solid #303030; */
  padding: 25px 0;
 }
 
@@ -101,6 +107,10 @@ footer {
  justify-content: center;
  background-color: rgb(193, 193, 193);
  padding: 25px 0;
+
+  /* position: fixed; */
+  bottom: 0;
+  /* width: 100%; */
 }
 
 .container {
@@ -230,7 +240,7 @@ table th {
 
 
 .table100-head th {
- font-family: OpenSans-Regular;
+ /* font-family: OpenSans-Regular; */
  font-size: 18px;
  color: #fff;
  line-height: 1.2;
@@ -244,7 +254,7 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr {
- font-family: OpenSans-Regular;
+ /* font-family: OpenSans-Regular; */
  font-size: 15px;
  color: gray;
  line-height: 1.2;
@@ -266,7 +276,7 @@ tbody td {
 }
 
 .column2 {
- width: 60%;
+ width: 50%;
 }
 
 .column3 {
@@ -276,6 +286,24 @@ tbody td {
 .column4 {
  width: 15%;
 }
+
+.column5{
+ width: 10%;
+}
+
+.column_delete-btn{
+ background-color: red;
+ padding: 10px 20px;
+ margin-right: 5px;
+}
+
+.column_modify-btn{
+ background-color: orange;
+ padding: 10px 20px;
+ text-decoration: none;
+
+}
+
 
 /* Responsive */
 @media screen and (max-width:768px) {
