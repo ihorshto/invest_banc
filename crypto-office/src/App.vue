@@ -21,7 +21,7 @@ import { RouterLink, RouterView } from 'vue-router'
   </header>
 
   <RouterView />
-  <footer class="footer">
-    <p> © Slava Ukraine</p>
+  <footer class="footer mt-5">
+    <p> © Slava Ukraine || France || Italy</p>
   </footer>
 </template>

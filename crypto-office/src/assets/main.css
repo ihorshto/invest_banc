@@ -383,3 +383,8 @@ tbody td {
   padding-right: 15px
  }
 }
+
+.modify_btn{
+  padding: 10px 20px;
+  background-color: orange;
+}

@@ -23,7 +23,6 @@ let loadInvestmentItem = function () {
     .then(response => response.json())
     .then(data => {
 
-
       investment.value = data;
       /*  console.log('myDate', myDate.value) */
       console.log("data", data);
@@ -35,6 +34,10 @@ let handleSubmit = function () {
   let description = document.getElementById("description").value;
   let date = document.getElementById("date").value;
   let sum = document.getElementById("sum").value;
+
+
+
+
 
   fetch(`http://localhost:8000/investments/${route.params.id}`, {
     method: 'PUT',
@@ -57,8 +60,6 @@ let handleSubmit = function () {
 
       console.log("data update", data);
     })
-
-
 }
 
 
@@ -75,23 +76,40 @@ loadInvestmentItem();
         <p class="content-text" id="investSum">Sum of investments: {{ investment.sum }}$</p>
       </div>
       <br>
-      <div>
+      <div class="form_container">
         <form @submit.prevent="handleSubmit">
           <div>
             <label for="description">Description:</label>
-            <input type="text" id="description" v-model="investment.description" required>
+            <input type="text" id="description" class="form-control" v-model="investment.description" required>
           </div>
           <div>
             <label for="date">Date:</label>
-            <input type="date" id="date" v-model="investment.date" required>
+            <input type="date" id="date" class="form-control" v-model="investment.date" required>
           </div>
           <div>
             <label for="sum">Sum:</label>
-            <input id="sum" v-model="investment.sum" required>
+            <input id="sum" class="form-control" v-model="investment.sum" required>
           </div>
-          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary mt-3" type="submit">Submit</button>
         </form>
       </div>
     </div>
   </main>
 </template>
+
+<style>
+.form_container {
+  margin: 0 auto;
+  width: 400px;
+}
+
+form label {
+  text-align: center;
+  width: 100%;
+  margin: 5px;
+}
+
+form button {
+  width: 100%;
+}
+</style>
