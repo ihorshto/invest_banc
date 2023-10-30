@@ -253,6 +253,10 @@ tbody tr:nth-child(even) {
  background-color: #f5f5f5
 }
 
+tbody .earnings:nth-child(even) {
+ background-color: #deffde;
+}
+
 tbody tr {
  /* font-family: OpenSans-Regular; */
  font-size: 15px;
@@ -264,6 +268,12 @@ tbody tr {
 tbody tr:hover {
  color: #555;
  background-color: #f5f5f5;
+ cursor: pointer
+}
+
+tbody .earnings:hover {
+ color: #555;
+ background-color: #deffde;
  cursor: pointer
 }
 

@@ -1,9 +1,11 @@
 <script setup>
 import { ref } from 'vue'
+import { useCalculationStore } from '../stores/calculs';
+
+const storeInvestments = useCalculationStore();
 
 let investments = ref([]);
 let investmentSum;
-
 const today = new Date().toISOString().slice(0, 10);
 
 let loadInvestment = function () {
@@ -20,9 +22,8 @@ let loadInvestment = function () {
       data.forEach(element => {
         investmentSum += element.sum;
       });
+      storeInvestments.getAllInvestments(investmentSum);
 
-      let myDate = data;
-      console.log('myDate', myDate[0])
       investments.value = data;
     })
 }
@@ -85,10 +86,11 @@ loadInvestment();
 <template>
   <main>
     <div class="container">
+      <br>
       <img class="content-img" src="@/assets/trre.png" alt="">
       <div class="content_box">
         <h2 class="content-title"> Investments </h2>
-        <p class="content-text" id="investSum">Sum of investments: {{ investmentSum }}$</p>
+        <p class="content-text" id="investSum">Sum of investments: {{ storeInvestments.totalInvestment }}$</p>
       </div>
       <form class="content_form">
         <div class="content_form-row">
