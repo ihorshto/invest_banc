@@ -12,9 +12,10 @@
   "dependencies": {
     "datejs": "^1.0.0-rc3",
     "dayjs": "^1.11.7",
-    "pinia": "^2.0.36",
+    "pinia": "^2.1.7",
     "vue": "^3.3.2",
-    "vue-router": "^4.2.0"
+    "vue-router": "^4.2.0",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",

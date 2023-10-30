@@ -3,15 +3,13 @@ import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
 
-// let investments = ref([]);
 const route = useRoute();
 const router = useRouter();
+let earning = ref({});
 
-let investment = ref({});
-
-let loadInvestmentItem = function () {
-  console.log('Load invest func');
-  fetch(`http://localhost:8000/investments/${route.params.id}`, {
+let loadEarningItem = function () {
+  console.log('Load earning func');
+  fetch(`http://localhost:8000/earnings/${route.params.id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
@@ -19,11 +17,8 @@ let loadInvestmentItem = function () {
   })
     .then(response => response.json())
     .then(data => {
-
-      investment.value = data;
-      /*  console.log('myDate', myDate.value) */
+      earning.value = data;
       console.log("data", data);
-
     })
 }
 
@@ -32,7 +27,7 @@ let handleSubmit = function () {
   let date = document.getElementById("date").value;
   let sum = document.getElementById("sum").value;
 
-  fetch(`http://localhost:8000/investments/${route.params.id}`, {
+  fetch(`http://localhost:8000/earnings/${route.params.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -45,17 +40,13 @@ let handleSubmit = function () {
   })
     .then(response => response.json())
     .then(data => {
-
-
-      console.log(router.push('/investments'));
-      router.push('/investments');
-
-
+      console.log(router.push('/earnings'));
+      router.push('/earnings');
       console.log("data update", data);
     })
 }
 
-loadInvestmentItem();
+loadEarningItem();
 
 </script>
 
@@ -65,22 +56,22 @@ loadInvestmentItem();
       <img class="content-img" src="@/assets/trre.png" alt="">
       <div class="content_box">
         <h2 class="content-title"> Investment </h2>
-        <p class="content-text" id="investSum">Sum of investments: {{ investment.sum }}$</p>
+        <p class="content-text" id="investSum">Sum of earnings: {{ earning.sum }}$</p>
       </div>
       <br>
       <div class="form_container">
         <form @submit.prevent="handleSubmit">
           <div>
             <label for="description">Description:</label>
-            <input type="text" id="description" class="form-control" v-model="investment.description" required>
+            <input type="text" id="description" class="form-control" v-model="earning.description" required>
           </div>
           <div>
             <label for="date">Date:</label>
-            <input type="date" id="date" class="form-control" v-model="investment.date" required>
+            <input type="date" id="date" class="form-control" v-model="earning.date" required>
           </div>
           <div>
             <label for="sum">Sum:</label>
-            <input id="sum" class="form-control" v-model="investment.sum" required>
+            <input id="sum" class="form-control" v-model="earning.sum" required>
           </div>
           <button class="btn btn-primary mt-3" type="submit">Submit</button>
         </form>
