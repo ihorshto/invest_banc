@@ -88,7 +88,7 @@ loadEarnings();
   <main>
     <div class="container">
       <br>
-      <img class="content-img" src="@/assets/trre.png" alt="">
+      <img class="content-img" src="@/assets/earn.png" alt="">
       <div class="content_box">
         <h2 class="content-title"> Earnings </h2>
         <p class="content-text" id="investSum">Sum of earnings: {{ earningSum }}$</p>
@@ -147,3 +147,9 @@ loadEarnings();
     </div>
   </main>
 </template>
+
+<style>
+.content-img {
+  width: 220px;
+}
+</style>

@@ -1,24 +1,6 @@
 <script scooped>
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'vue-chartjs'
-// import { useCalculationStore } from '../stores/calculs';
-
-// const storeInvestments = useCalculationStore();
-
-// let sumGlobal = storeInvestments.totalInvestment + storeInvestments.totalEarnings;
-// let onePercent = sumGlobal / 100;
-// console.log("sumGlobal", sumGlobal);
-// console.log("onePercent", onePercent);
-
-// let investmentsPercent = Math.round(storeInvestments.totalInvestment / onePercent);
-// let earningsPercent = Math.round(storeInvestments.totalEarnings / onePercent);
-
-
-// console.log("investmentsPercent", investmentsPercent);
-// console.log("earningsPercent", earningsPercent);
-// console.log("storeInvestments", storeInvestments.totalEarnings);
-
-// console.log("dataInvest", dataInvest);
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 export default {
@@ -50,10 +32,12 @@ export default {
   <div class="chart">
    <h4 class="mb-4 text-center">{{ text }}</h4>
    <Doughnut id="my-chart-id" :options="chartOptions" :data="chartData" class="donut" />
-   Investments - {{ Math.round(dataInvest.totalInvestment / ((dataInvest.totalInvestment + dataInvest.totalEarnings) /
-    100)) }}% ||
-   Earnings - {{ Math.round(dataInvest.totalEarnings / ((dataInvest.totalInvestment + dataInvest.totalEarnings) / 100))
-   }}%
+   <p class="mt-3">
+    Investments - {{ Math.round(dataInvest.totalInvestment / ((dataInvest.totalInvestment + dataInvest.totalEarnings) /
+     100)) }}% ||
+    Earnings - {{ Math.round(dataInvest.totalEarnings / ((dataInvest.totalInvestment + dataInvest.totalEarnings) / 100))
+    }}%
+   </p>
   </div>
  </div>
 </template>
@@ -67,7 +51,7 @@ export default {
 }
 
 .donut {
- width: 400px !important;
- height: 400px !important;
+ width: 500px !important;
+ height: 500px !important;
 }
 </style>
