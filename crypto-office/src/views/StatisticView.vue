@@ -19,10 +19,14 @@ console.log(storeInvestments.totalInvestment);
         <h2 class="content-title"> Statistic </h2>
         <p class="content-text" id="investSum">Sum of investments: {{ storeInvestments.totalInvestment }}$</p>
         <p class="content-text" id="investSum">Sum of earnings: {{ storeInvestments.totalEarnings }}$</p>
+        <h3 class="pt-5">{{ storeInvestments.totalEarnings > storeInvestments.totalInvestment ? "Realized profit:" :
+          "Unrealized profit:" }}
+          {{ storeInvestments.totalEarnings - storeInvestments.totalInvestment }}$
+        </h3>
         <br>
       </div>
       <div>
-        <DonutChart :dataInvest="storeInvestments.totalInvestment" text="hello world" />
+        <DonutChart :dataInvest="storeInvestments" text="Comparison of investment amount and earnings" />
       </div>
     </div>
   </main>
