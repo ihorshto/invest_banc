@@ -7,7 +7,7 @@ const storeInvestments = useCalculationStore();
 let investments = ref([]);
 let investmentSum;
 const today = new Date().toISOString().slice(0, 10);
-
+// Load LIst of Investments
 let loadInvestment = function () {
   investmentSum = 0;
   fetch("http://localhost:8000/investments", {
