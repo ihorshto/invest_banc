@@ -7,6 +7,7 @@ const route = useRoute();
 const router = useRouter();
 let earning = ref({});
 
+// Load selected Earning
 let loadEarningItem = function () {
   console.log('Load earning func');
   fetch(`http://localhost:8000/earnings/${route.params.id}`, {
@@ -22,11 +23,12 @@ let loadEarningItem = function () {
     })
 }
 
+// Submit action
 let handleSubmit = function () {
   let description = document.getElementById("description").value;
   let date = document.getElementById("date").value;
   let sum = document.getElementById("sum").value;
-
+  // fetch request
   fetch(`http://localhost:8000/earnings/${route.params.id}`, {
     method: 'PUT',
     headers: {
@@ -41,7 +43,7 @@ let handleSubmit = function () {
     .then(response => response.json())
     .then(data => {
       console.log(router.push('/earnings'));
-      router.push('/earnings');
+      router.push({path: 'earnings'}); // push to /earnings
       console.log("data update", data);
     })
 }
