@@ -39,22 +39,22 @@ async function loadInvestments(where = "1=1", orderBy = "description") {
 	const [rows, fields] = await connection.query('SELECT * FROM investments');
 	return rows;
 }
-async function loadOneInvestment(id) {
+async function loadOneInvestment(id) { // load selected Investment
 	const investment = await connection.query('SELECT * FROM investments WHERE id =?', [id]);
 	return investment[0][0];
 }
-async function deleteOneInvestment(id) {
+async function deleteOneInvestment(id) { // delete selected Investment
 	const investment = await connection.query('DELETE FROM investments WHERE id =?', [id]);
 	console.log("del item", investment);
 	return investment;
 }
-async function updateOneInvestment(id, body) {
+async function updateOneInvestment(id, body) { // update selected Investment
 	console.log("updateOneInvestment");
 	const investment = await connection.query('UPDATE investments SET description=?, date=?, sum=? WHERE id =?', [body.description, body.date, body.sum, id])
 	console.log("update item", investment);
 	return investment;
 }
-async function addNewInvestment(newObj) {
+async function addNewInvestment(newObj) { // add new Investment
 	console.log("newObj", newObj);
 	// INSERT INTO table_name(column_1, column_2, column_3) VALUES
 	const newInvestment = await connection.query(`INSERT INTO investments (description, date, sum) VALUES ('${newObj.description}', '${newObj.date}', ${newObj.sum})`);
@@ -63,11 +63,11 @@ async function addNewInvestment(newObj) {
 }
 
 
-async function loadEarnings() {
+async function loadEarnings() { // load Earnigns
 	const [rows, fields] = await connection.query('SELECT * FROM earnings');
 	return rows;
 }
-async function addNewEarning(newObj) {
+async function addNewEarning(newObj) { // load new Earning item
 	console.log("newObj", newObj);
 	// INSERT INTO table_name(column_1, column_2, column_3) VALUES
 	const newEarning = await connection.query(`INSERT INTO earnings (description, date, sum) VALUES ('${newObj.description}', '${newObj.date}', ${newObj.sum})`);
@@ -75,18 +75,18 @@ async function addNewEarning(newObj) {
 	return newEarning[0];
 }
 
-async function loadOneEarning(id) {
+async function loadOneEarning(id) { // load selected Earning
 	const earning = await connection.query('SELECT * FROM earnings WHERE id =?', [id])
 	return earning[0][0];
 }
 
-async function updateOneEarning(id, body) {
+async function updateOneEarning(id, body) { // update selected Earning
 	const earning = await connection.query(`UPDATE earnings SET description=?, date=?, sum=? WHERE id=?`, [body.description, body.date, body.sum, id]);
 	console.log("earning", earning);
 	return earning;
 }
 
-async function deleteOneEarning(id) {
+async function deleteOneEarning(id) { // delete selected Earning
 	const earning = await connection.query('DELETE FROM earnings WHERE id=?', [id]);
 	return earning;
 }

@@ -61,7 +61,7 @@ CREATE TABLE `investments` (
 
 INSERT INTO `investments` (`id`, `description`, `date`, `sum`) VALUES
 (51, 'ZkSync ', '2023-10-11', 35),
-(56, 'Flat in Ternopil 40', '2023-09-29', 10100);
+(56, 'Flat', '2023-09-29', 10100);
 
 --
 -- Index pour les tables déchargées
