@@ -43,7 +43,7 @@ let handleSubmit = function () {
     .then(response => response.json())
     .then(data => {
       console.log(router.push('/earnings'));
-      router.push({path: 'earnings'}); // push to /earnings
+      router.push({path: '/earnings'}); // push to /earnings
       console.log("data update", data);
     })
 }
