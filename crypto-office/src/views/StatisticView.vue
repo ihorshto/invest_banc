@@ -1,14 +1,10 @@
 <script setup >
-import { ref } from 'vue'
 import { useCalculationStore } from '../stores/calculs';
-import BarChart from '../views/BarChart.vue'
 import DonutChart from '../views/DonutChart.vue'
 
 
 const storeInvestments = useCalculationStore();
 console.log(storeInvestments.totalInvestment);
-
-// let line = 'min-height: ' + `${storeInvestments.totalInvestment}` + 'px; background-color: red;';
 
 </script>
 
