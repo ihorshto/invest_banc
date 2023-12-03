@@ -3,7 +3,7 @@ import { useCalculationStore } from '../stores/calculs';
 import DonutChart from '../views/DonutChart.vue'
 
 
-const storeInvestments = useCalculationStore();
+const storeInvestments = useCalculationStore(); // store value
 console.log(storeInvestments.totalInvestment);
 
 </script>
